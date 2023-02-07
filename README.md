@@ -2,14 +2,6 @@
 
 ![logo](./logo.png)
 
-## Team
-
-- Matthew Notarangelo (z5116928) [Scrum Master]
-- Andrew Cvetko (z3330071) [Developer]
-- Han-Hsin Lin (z5335464) [Developer]
-- Almersy Xing (z5339661) [Developer]
-- Kexin Zhao (z5278385) [Developer]
-
 ## Project Structure
 
 ```sh
