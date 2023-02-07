@@ -1,0 +1,2380 @@
+# FaceCookBook OPEN API specification as exported from Stoplight
+openapi: 3.1.0
+x-stoplight:
+  id: szjnnu34hiiwj
+info:
+  title: FaceCookBook
+  version: '1.0'
+  summary: API documentation for COMP9900 - ScrumLegends - FaceCookBook
+  description: ''
+  contact:
+    name: Matt Notarangelo
+    email: z5116928@unsw.edu.au
+  license:
+    identifier: MIT
+    name: MIT
+servers:
+  - url: 'http://localhost:3001/app'
+    description: Matthew Notarangelo
+paths:
+  /test:
+    get:
+      summary: Test endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                200 response:
+                  value:
+                    message: Test successful
+                example-1:
+                  value:
+                    message: string
+      operationId: get-test
+      description: Returns a 200 response for testing purposes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+        description: Empty
+      parameters: []
+    parameters: []
+  /user/login:
+    post:
+      summary: Log in user
+      operationId: post-user-login
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  user_id:
+                    type: integer
+              examples:
+                example-1:
+                  value:
+                    message: User logged in successfully
+                    user_id: 63
+        '400':
+          description: Bad Request - incorrect login details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Incorrect login credentials:
+                  value:
+                    message: Username or password is incorrect
+                example-1:
+                  value:
+                    message: string
+      description: Log in the user with username and password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: matt
+                password:
+                  type: string
+                  minLength: 6
+                  example: '123456'
+              required:
+                - username
+                - password
+            examples:
+              Login body:
+                value:
+                  username: matt
+                  password: '123456'
+              example-1:
+                value:
+                  username: string
+                  password: string
+        description: ''
+  /user/signup:
+    post:
+      summary: Create user profile
+      operationId: post-user-signup
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  user_id:
+                    type: integer
+              examples:
+                Successful signup:
+                  value:
+                    message: User created
+                    user_id: 1
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Email address already in use:
+                  value:
+                    message: A user with that email address already exists
+                Username already in use:
+                  value:
+                    message: A user with that username already exists
+                Invalid email address:
+                  value:
+                    message: Invalid email address
+                Password strength:
+                  value:
+                    message: Password needs to be 6 characters or longer
+      description: Creates user account and logs them in
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: matt
+                email:
+                  type: string
+                  format: email
+                  example: matt@email.com
+                password:
+                  type: string
+                  minLength: 6
+                  example: '123456'
+              required:
+                - username
+                - email
+                - password
+            examples:
+              Example signup:
+                value:
+                  username: matt
+                  email: matt@email.com
+                  password: '123456'
+              example-1:
+                value:
+                  username: matt
+                  email: matt@email.com
+                  password: '123456'
+  /user/logout:
+    post:
+      summary: Logout user
+      operationId: post-user-logout
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Successful logout:
+                  value:
+                    message: User logged out
+      description: Logs the user out
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+        description: None
+  /user/data:
+    get:
+      summary: Get user data
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  username:
+                    type: string
+                  email:
+                    type: string
+                  subscribed:
+                    type: boolean
+                  date_joined:
+                    type: string
+                  last_login:
+                    type: string
+                  curr_user:
+                    type: boolean
+                  recipes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Recipe'
+              examples:
+                example-1:
+                  value:
+                    id: 1
+                    username: matt
+                    email: matt@email.com
+                    subscribed: true
+                    date_joined: date
+                    last_login: date
+                    curr_user: true
+                    recipes:
+                      - id: 56
+                        uid: 330
+                        name: meatballs
+                        cuisine: italian
+                        cooking_style: boil
+                        meal_type: dinner
+                        time: 60
+                        method: 1. 2. 3.
+                        plating: idk
+                        servings: 4
+                        image: base64 data
+                        calories: 520
+                        protein: 10
+                        carbs: 20
+                        fats: 40
+                        created_date: '2019-08-24'
+                        modified_date: '2019-08-24'
+                        uploaded_by: matt
+                        user_rating: 1
+                        total_rating: 63
+                        ingredients:
+                          - id: 1
+                            rid: 522
+                            quantity: 5
+                            units: cups
+                            ingredient: plain flour
+                          - id: 2
+                            rid: 522
+                            quantity: 15
+                            units: cups
+                            ingredient: spaghetti
+                        tags:
+                          - fast
+                          - easy
+                          - high protein
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                404 Example:
+                  value:
+                    message: A user with that id doesn't exist in the database
+      operationId: get-user-data
+      description: Get user data and all recipes that the user has made
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+        description: None
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: id
+    put:
+      summary: Edit user email
+      operationId: put-user-data
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Valid response:
+                  value:
+                    message: User updated successfully
+      description: Edit user email
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+            examples:
+              Example body:
+                value:
+                  email: matt@gmail.com
+  /user/isloggedin:
+    get:
+      summary: Check if user is logged in
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_is_logged_in:
+                    type: boolean
+                  user_id:
+                    type: integer
+              examples:
+                example-1:
+                  value:
+                    user_is_logged_in: true
+                    user_id: 64
+      operationId: get-user-isloggedin
+      description: Helper endpoint which returns whether the user is authenticated - for managing guest sessions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+        description: None
+  /recipe/data:
+    get:
+      summary: Get recipe
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+              examples:
+                example-1:
+                  value:
+                    id: 56
+                    uid: 330
+                    name: meatballs
+                    is_subscribed: false
+                    cuisine: italian
+                    cooking_style: boil
+                    meal_type: dinner
+                    time: 60
+                    method: 1. 2. 3.
+                    plating: idk
+                    servings: 4
+                    image: base64 data
+                    calories: 520
+                    protein: 10
+                    carbs: 20
+                    fats: 40
+                    created_date: '2019-08-24'
+                    modified_date: '2019-08-24'
+                    uploaded_by: matt
+                    user_rating: 1
+                    total_rating: 63
+                    ingredients:
+                      - id: 1
+                        rid: 522
+                        quantity: 5
+                        units: cups
+                        ingredient: plain flour
+                      - id: 2
+                        rid: 522
+                        quantity: 15
+                        units: cups
+                        ingredient: spaghetti
+                    tags:
+                      - fast
+                      - easy
+                      - high protein
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Example 404:
+                  value:
+                    message: A recipe with that id doesn't exist in the database
+      operationId: get-recipe-data
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: id
+          description: Recipe id to get
+          required: true
+      description: Get recipe data from id passed as query parameter
+    post:
+      summary: Create recipe
+      operationId: post-recipe-data
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  id:
+                    type: integer
+              examples:
+                201 Example:
+                  value:
+                    message: Recipe created successfully
+                    id: 53
+      description: Create recipe from data
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Recipe'
+            examples:
+              example-1:
+                value:
+                  id: 56
+                  uid: 330
+                  name: meatballs
+                  cuisine: italian
+                  cooking_style: boil
+                  meal_type: dinner
+                  time: 60
+                  method: 1. 2. 3.
+                  plating: idk
+                  servings: 4
+                  image: base64 data
+                  calories: 520
+                  protein: 10
+                  carbs: 20
+                  fats: 40
+                  created_date: '2019-08-24'
+                  modified_date: '2019-08-24'
+                  uploaded_by: matt
+                  user_rating: 1
+                  total_rating: 63
+                  ingredients:
+                    - id: 1
+                      rid: 522
+                      quantity: 5
+                      units: cups
+                      ingredient: plain flour
+                    - id: 2
+                      rid: 522
+                      quantity: 15
+                      units: cups
+                      ingredient: spaghetti
+                  tags:
+                    - fast
+                    - easy
+                    - high protein
+        description: Image binary should be sent as a FILE
+      parameters: []
+    delete:
+      summary: Delete recipe
+      operationId: delete-recipe-data
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Success:
+                  value:
+                    message: Recipe deleted successfully
+                example-1:
+                  value:
+                    message: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                404 Not found:
+                  value:
+                    message: "A recipe with that id, for that user, doesn't exist in the database"
+                example-1:
+                  value:
+                    message: string
+      description: Delete a recipe from the app
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+            examples:
+              Example body:
+                value:
+                  id: 1
+    parameters: []
+  /recipe/trending:
+    get:
+      summary: Get trending recipes
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recipe'
+              examples:
+                example-1:
+                  value:
+                    - id: 56
+                      uid: 330
+                      is_subscribed: false
+                      name: meatballs
+                      cuisine: italian
+                      cooking_style: boil
+                      meal_type: dinner
+                      time: 60
+                      method: 1. 2. 3.
+                      plating: idk
+                      servings: 4
+                      image: base64 data
+                      calories: 520
+                      protein: 10
+                      carbs: 20
+                      fats: 40
+                      created_date: '2019-08-24'
+                      modified_date: '2019-08-24'
+                      uploaded_by: matt
+                      user_rating: 1
+                      total_rating: 63
+                      ingredients:
+                        - id: 1
+                          rid: 522
+                          quantity: 5
+                          units: cups
+                          ingredient: plain flour
+                        - id: 2
+                          rid: 522
+                          quantity: 15
+                          units: cups
+                          ingredient: spaghetti
+                      tags:
+                        - fast
+                        - easy
+                        - high protein
+      operationId: get-recipe-trending
+      description: News feed for users who aren't logged in
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+        description: None
+  /recipe/feed:
+    get:
+      summary: Recipe news feed
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recipe'
+              examples:
+                example-1:
+                  value:
+                    - id: 56
+                      uid: 330
+                      is_subscribed: false
+                      name: meatballs
+                      cuisine: italian
+                      cooking_style: boil
+                      meal_type: dinner
+                      time: 60
+                      method: 1. 2. 3.
+                      plating: idk
+                      servings: 4
+                      image: base64 data
+                      calories: 520
+                      protein: 10
+                      carbs: 20
+                      fats: 40
+                      created_date: '2019-08-24'
+                      modified_date: '2019-08-24'
+                      uploaded_by: matt
+                      user_rating: 1
+                      total_rating: 63
+                      ingredients:
+                        - id: 1
+                          rid: 522
+                          quantity: 5
+                          units: cups
+                          ingredient: plain flour
+                        - id: 2
+                          rid: 522
+                          quantity: 15
+                          units: cups
+                          ingredient: spaghetti
+                      tags:
+                        - fast
+                        - easy
+                        - high protein
+      operationId: get-recipe-feed
+      description: Get news feed already sorted by date modified and likes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+        description: None
+  /recipe/search:
+    get:
+      summary: Basic search function
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recipe'
+              examples:
+                example-1:
+                  value:
+                    - id: 56
+                      uid: 330
+                      is_subscribed: false
+                      name: meatballs
+                      cuisine: italian
+                      cooking_style: boil
+                      meal_type: dinner
+                      time: 60
+                      method: 1. 2. 3.
+                      plating: idk
+                      servings: 4
+                      image: base64 data
+                      calories: 520
+                      protein: 10
+                      carbs: 20
+                      fats: 40
+                      created_date: '2019-08-24'
+                      modified_date: '2019-08-24'
+                      uploaded_by: matt
+                      user_rating: 1
+                      total_rating: 63
+                      ingredients:
+                        - id: 1
+                          rid: 522
+                          quantity: 5
+                          units: cups
+                          ingredient: plain flour
+                        - id: 2
+                          rid: 522
+                          quantity: 15
+                          units: cups
+                          ingredient: spaghetti
+                      tags:
+                        - fast
+                        - easy
+                        - high protein
+      operationId: get-recipe-search
+      description: 'Takes in a single word and searches name, method, cuisine, cooking_style, meal_type, tag, and ingredient based on that query. Returns matching recipes'
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: search_query
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+        description: None
+  /recipe/advanced_search:
+    get:
+      summary: Advanced search for recipes
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recipe'
+              examples:
+                example-1:
+                  value:
+                    - id: 56
+                      uid: 330
+                      is_subscribed: false
+                      name: meatballs
+                      cuisine: italian
+                      cooking_style: boil
+                      meal_type: dinner
+                      time: 60
+                      method: 1. 2. 3.
+                      plating: idk
+                      servings: 4
+                      image: base64 data
+                      calories: 520
+                      protein: 10
+                      carbs: 20
+                      fats: 40
+                      created_date: '2019-08-24'
+                      modified_date: '2019-08-24'
+                      uploaded_by: matt
+                      user_rating: 1
+                      total_rating: 63
+                      ingredients:
+                        - id: 1
+                          rid: 522
+                          quantity: 5
+                          units: cups
+                          ingredient: plain flour
+                        - id: 2
+                          rid: 522
+                          quantity: 15
+                          units: cups
+                          ingredient: spaghetti
+                      tags:
+                        - fast
+                        - easy
+                        - high protein
+      operationId: get-recipe-advanced_search
+      description: |-
+        Advanced search which returns recipes which match the below parameters. All are optional
+            - cuisine
+            - cooking_style
+            - meal_type
+            - time_low <= time <= time_high
+            - protein_low <= protein <= protein_high
+            - carbs_low <= carbs <= carbs_high
+            - calories_low <= calories <= calories_high
+            - fats_low <= fats <= fats_high
+            - tag
+            - ingredient
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: cuisine
+        - schema:
+            type: string
+          in: query
+          name: cooking_style
+        - schema:
+            type: string
+          in: query
+          name: meal_type
+        - schema:
+            type: string
+          in: query
+          name: time_low
+          description: minimum amount of time to cook
+        - schema:
+            type: string
+          in: query
+          name: time_high
+          description: maximum amount of time to cook
+        - schema:
+            type: string
+          in: query
+          name: protein_low
+          description: minimum amount of protein
+        - schema:
+            type: string
+          in: query
+          name: protein_high
+          description: maximum amount of protein
+        - schema:
+            type: string
+          in: query
+          name: carbs_low
+          description: minimum amount of carbs
+        - schema:
+            type: string
+          in: query
+          name: carbs_high
+          description: maximum amount of carbs
+        - schema:
+            type: string
+          in: query
+          name: calories_low
+          description: minimum amount of calories
+        - schema:
+            type: string
+          in: query
+          name: calories_high
+          description: maximum amount of calories
+        - schema:
+            type: string
+          in: query
+          name: fats_low
+          description: minimum amount of fats
+        - schema:
+            type: string
+          in: query
+          name: fats_high
+          description: maximum amount of fats
+        - schema:
+            type: string
+          in: query
+          name: tag
+          description: single tag
+        - schema:
+            type: string
+          in: query
+          name: ingredient
+          description: single ingredient
+  /cookbook/data/:
+    post:
+      summary: Create new cookbook
+      operationId: post-cookbook-data
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  id:
+                    type: integer
+              examples:
+                example-1:
+                  value:
+                    message: my cookbook
+                    id: 5
+      description: Create a new cookbook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+            examples:
+              example-1:
+                value:
+                  name: Easy recipes
+                  description: Easy recipes that anyone can make.
+        description: Create new cookbook needs two fields the name of the cookbook and a short description of the cookbook.
+    put:
+      summary: Edit cookbook
+      operationId: put-cookbook-data
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Successful update:
+                  value:
+                    message: Cookbook updated successfully
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Adding a recipe to a cookbook that is already there:
+                  value:
+                    message: This recipe is already in the cookbook
+      description: Edit cookbook meta-data or add a recipe to a cookbook.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: cookbook id
+                name:
+                  type: string
+                description:
+                  type: string
+                rid:
+                  type: integer
+            examples:
+              Update recipe only:
+                value:
+                  id: 54
+                  rid: 23
+              Update metadata (name) only:
+                value:
+                  id: 53
+                  name: Best recipes
+              Update metadata and recipe:
+                value:
+                  id: 52
+                  name: Best recipes
+                  description: Simply the best. Better than all the rest.
+                  rid: 23
+    delete:
+      summary: Delete cookbook
+      operationId: delete-cookbook-data
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  cid:
+                    type: integer
+                  deleted_recipes:
+                    type: array
+                    items:
+                      type: integer
+                  non_deleted_recipes:
+                    type: array
+                    items:
+                      type: integer
+              examples:
+                Deleting recipes only:
+                  value:
+                    message: Recipes deleted from cookbook successfully.
+                    cid: 23
+                    deleted_recipes:
+                      - 12
+                      - 14
+                    non_deleted_recipes:
+                      - 13
+                      - 15
+                Delete cookbook and all recipes in cookbook:
+                  value:
+                    message: Cookbook deleted successfully.
+                    cid: 23
+                    deleted_recipes:
+                      - 12
+                      - 14
+                    non_deleted_recipes:
+                      - 13
+                      - 15
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Deleting a non-existent cookbook:
+                  value:
+                    message: A cookbook with that id doesn't exist in the database
+      description: Delete a cookbook from a users list of cookbooks or delete a recipe(s) from a cookbook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: cookbook id
+                rid:
+                  type: array
+                  description: list of recipe ids to delete
+                  items:
+                    type: integer
+            examples:
+              Delete list of recipes:
+                value:
+                  id: 23
+                  rid:
+                    - 12
+                    - 14
+              Delete all recipes and cookbook:
+                value:
+                  id: 23
+        description: ''
+    get:
+      summary: Get cookbook data
+      operationId: get-cookbook-data
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uid:
+                    type: integer
+                  cookbook_id:
+                    type: integer
+                  cookbook_name:
+                    type: string
+                  cookbook_des:
+                    type: string
+                  recipes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Recipe'
+              examples:
+                Example 1:
+                  value:
+                    uid: 0
+                    cookbook_id: 0
+                    cookbook_name: string
+                    cookbook_des: string
+                    recipes:
+                      - id: 56
+                        uid: 330
+                        name: meatballs
+                        cuisine: italian
+                        cooking_style: boil
+                        meal_type: dinner
+                        time: 60
+                        method: 1. 2. 3.
+                        plating: idk
+                        servings: 4
+                        image: base64 data
+                        calories: 520
+                        protein: 10
+                        carbs: 20
+                        fats: 40
+                        created_date: '2019-08-24'
+                        modified_date: '2019-08-24'
+                        uploaded_by: matt
+                        user_rating: 1
+                        total_rating: 63
+                        ingredients:
+                          - id: 1
+                            rid: 522
+                            quantity: 5
+                            units: cups
+                            ingredient: plain flour
+                          - id: 2
+                            rid: 522
+                            quantity: 15
+                            units: cups
+                            ingredient: spaghetti
+                        tags:
+                          - fast
+                          - easy
+                          - high protein
+      description: Returns all of a users cookbooks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+        description: Can take a user id if you need to show another users cookbooks
+  /recipe/like:
+    get:
+      summary: Get recipe likes
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_rating:
+                    type: integer
+                    description: '-1 = dislike, 0 = no rating, 1 = like'
+                    enum:
+                      - -1
+                      - 0
+                      - 1
+                  total_rating:
+                    type: integer
+              examples:
+                Typical response:
+                  value:
+                    user_rating: -1
+                    total_rating: 52
+                example-1:
+                  value:
+                    user_rating: 0
+                    total_rating: 0
+      operationId: get-recipe-like
+      description: 'Get number of likes (user, total) for the recipe id'
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: rid
+          description: Recipe id
+          required: true
+    post:
+      summary: Update recipe like/dislike
+      operationId: post-recipe-like
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      description: Update database with user likes/dislikes/no opinion of recipe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rid:
+                  type: integer
+                opinion:
+                  type: boolean
+                  description: 'True for like, False for dislike'
+              required:
+                - rid
+                - opinion
+        description: ''
+    delete:
+      summary: Remove user like/dislike recipe
+      operationId: delete-recipe-like
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      description: Removes user like/dislike for a specific recipe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rid:
+                  type: integer
+              required:
+                - rid
+  /subscribe/list:
+    get:
+      summary: Get list of subscribed users
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  subscribed:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Subscribe'
+              examples:
+                example-1:
+                  value:
+                    subscribed:
+                      - id: 1
+                        name: Chef
+                      - id: 2
+                        name: Sous Chef
+      operationId: get-subscribe-list
+      description: Gets a list of user ids that a user is subscribed to.
+    post:
+      summary: Subscribe to user
+      operationId: post-subscribe-list
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                User is already subscribed to other user:
+                  value:
+                    message: 2 already subscribed to 1
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Successful subscription:
+                  value:
+                    message: 2 subscribed to 1
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Subscribe to a non-existent user:
+                  value:
+                    message: A user with that id doesn't exist in the database
+      description: Allows a user to subscribe to another users content.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                subscribed_to:
+                  type: integer
+            examples:
+              example-1:
+                value:
+                  subscribed_to: 1
+    delete:
+      summary: Unsubscribe from user
+      operationId: delete-subscribe-list
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Trying to unsubscribe from user that you are not subscribed too:
+                  value:
+                    message: 2 not subscribed to 1
+                Successful unsubscribe:
+                  value:
+                    message: 2 unsubscribed from 1
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Unsubscribe from non-existent user:
+                  value:
+                    message: A user with that id doesn't exist in the database
+      description: Unsubscribe from a user.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                unsubscribe:
+                  type: integer
+  /shoppinglist/recipes/:
+    get:
+      summary: Get shopping list recipes
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    recipe:
+                      $ref: '#/components/schemas/Shopping-List-Recipe'
+                    ingredients:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Shopping-List-Ingredient'
+              examples:
+                Recipe with ingredients:
+                  value:
+                    - recipe:
+                        id: 1
+                        uid: 3
+                        rid: 2
+                        servings: 4
+                      ingredients:
+                        - id: 1
+                          uid: 2
+                          rid: 3
+                          quantity: 100
+                          units: mL
+                          ingredient: cream
+                Stand-alone ingredients not associated with recipe:
+                  value:
+                    - recipe: {}
+                      ingredients:
+                        - id: 1
+                          uid: 2
+                          rid: 3
+                          quantity: 100
+                          units: mL
+                          ingredient: cream
+      operationId: get-shoppinglist-recipes
+      description: Fetches a list of recipes and ingredients associated with that recipe in a users shopping list
+    put:
+      summary: Amend recipe in shopping list
+      operationId: put-shoppinglist-recipes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Recipe added to shopping list:
+                  value:
+                    message: Recipe rid added.
+                Recipe amended in shopping list:
+                  value:
+                    message: Recipe rid amended.
+                Recipe deleted from shopping list:
+                  value:
+                    message: Recipe rid deleted.
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Tried to delete a recipe that does not exist in shopping list:
+                  value:
+                    message: Recipe not in shopping list
+      description: 'Allows a user to add a recipe, amend servings of recipe or delete recipe from shopping list'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rid:
+                  type: integer
+                servings:
+                  type: integer
+            examples:
+              Add/amend recipe:
+                value:
+                  rid: 2
+                  servings: 3
+              Delete recipe:
+                value:
+                  rid: 3
+                  servings: 0
+        description: Will check if a recipe exists in the shopping and will update servings to what is given in the request. If servings is 0 it will delete the recipe from the shopping list if it exists in the shopping list.
+    delete:
+      summary: Delete entire shopping list
+      operationId: delete-shoppinglist-recipes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Deleted shopping list:
+                  value:
+                    message: All recipes and ingredients removed from shopping list.
+      description: Deletes all ingredients and recipes from a user's shopping list
+  /shoppinglist/ingredients/:
+    get:
+      summary: Get aggregate ingredients in shopping list
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Aggregate-Ingredient'
+              examples:
+                Example 1:
+                  value:
+                    - quantity: 2
+                      units: kg
+                      name: fish
+      operationId: get-shoppinglist-ingredients
+      description: Fetches an aggregated list of ingredients in a user's shopping list
+    post:
+      summary: Add ingredient to shopping list
+      operationId: post-shoppinglist-ingredients
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  messsage:
+                    type: string
+      description: Add individual ingredients to shopping list
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rid:
+                  type:
+                    - integer
+                    - 'null'
+                ingredients:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Aggregate-Ingredient'
+            examples:
+              Add ingredient (not associated with recipe):
+                value:
+                  rid: None
+                  ingredients:
+                    - quantity: 2
+                      units: kg
+                      name: fish
+              Add ingredient to recipe:
+                value:
+                  rid: 1
+                  ingredients:
+                    - quantity: 2
+                      units: kg
+                      name: fish
+        description: rid must be set to None if added as single ingredient as an extra otherwise it will add the ingredient to the corresponding recipe
+    put:
+      summary: Amend ingredients in shopping list
+      operationId: put-shoppinglist-ingredients
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Example 1:
+                  value:
+                    message: Recipe rid ingredients amended.
+      description: Amend ingredient in shopping list
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rid:
+                  type:
+                    - integer
+                    - 'null'
+                ingredients:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Aggregate-Ingredient-2'
+            examples:
+              Amend stand-alone ingredient:
+                value:
+                  rid: None
+                  ingredients:
+                    - id: 1
+                      quantity: 5
+                      units: tsp
+                      ingredient: msg
+              Amend ingredient in recipe:
+                value:
+                  rid: 2
+                  ingredients:
+                    - id: 1
+                      quantity: 5
+                      units: tsp
+                      ingredient: msg
+        description: rid must be set to None if added as single ingredient as an extra otherwise it will add the ingredient to the corresponding recipe
+    delete:
+      summary: ''
+      operationId: delete-shoppinglist-ingredients
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Example 1:
+                  value:
+                    message: Recipe rid ingredients deleted.
+      description: Delete ingredient in shopping list
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rid:
+                  type:
+                    - integer
+                    - 'null'
+                ingredients:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Aggregate-Ingredient-2'
+            examples:
+              Delete stand-alone ingredient:
+                value:
+                  rid: None
+                  ingredients:
+                    - id: 1
+                      quantity: 5
+                      units: tsp
+                      ingredient: msg
+              Delete ingredient from recipe:
+                value:
+                  rid: 2
+                  ingredients:
+                    - id: 1
+                      quantity: 5
+                      units: tsp
+                      ingredient: msg
+  /comment/list:
+    get:
+      summary: Get all recipe comments
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+              examples:
+                Example 1:
+                  value:
+                    - id: 1
+                      rid: 4
+                      uid: 2
+                      comment: First comment
+                      username: Andrew
+          headers: {}
+      operationId: get-comment-list
+      description: Retrieves all comments for a recipe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rid:
+                  type: integer
+            examples:
+              Example 1:
+                value:
+                  rid: 1
+    post:
+      summary: Add a comment
+      operationId: post-comment-list
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Example 1:
+                  value:
+                    message: Commented on recipe rid
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Example 1:
+                  value:
+                    message: Recipe does not exist
+      description: Post a comment to a recipe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rid:
+                  type: integer
+                comment:
+                  type: string
+            examples:
+              Example 1:
+                value:
+                  rid: 2
+                  comment: Good recipe
+        description: ''
+    put:
+      summary: Edit comment
+      operationId: put-comment-list
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Example 1:
+                  value:
+                    message: Comment cid amended.
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Example 1:
+                  value:
+                    message: Comment does not exist
+      description: Edit existing comment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rid:
+                  type: integer
+                cid:
+                  type: integer
+                comment:
+                  type: string
+            examples:
+              Example 1:
+                value:
+                  rid: 4
+                  cid: 2
+                  comment: My new comment.
+    delete:
+      summary: Delete comment
+      operationId: delete-comment-list
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Example 1:
+                  value:
+                    message: Comment cid deleted.
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Example 1:
+                  value:
+                    message: Comment does not exist.
+      description: Delete a comment from a recipe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rid:
+                  type: integer
+                cid:
+                  type: integer
+            examples:
+              Example 1:
+                value:
+                  rid: 4
+                  cid: 2
+  /recipe/recommendation/:
+    get:
+      summary: Get recommended recipes
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '':
+                      $ref: '#/components/schemas/Recipe'
+                    score:
+                      type: integer
+              examples:
+                Example 1:
+                  value:
+                    - '':
+                        id: 56
+                        uid: 330
+                        name: meatballs
+                        cuisine: italian
+                        cooking_style: boil
+                        meal_type: dinner
+                        time: 60
+                        method: 1. 2. 3.
+                        plating: idk
+                        servings: 4
+                        image: base64 data
+                        calories: 520
+                        protein: 10
+                        carbs: 20
+                        fats: 40
+                        created_date: '2019-08-24'
+                        modified_date: '2019-08-24'
+                        uploaded_by: matt
+                        user_rating: 1
+                        total_rating: 63
+                        ingredients:
+                          - id: 1
+                            rid: 522
+                            quantity: 5
+                            units: cups
+                            ingredient: plain flour
+                          - id: 2
+                            rid: 522
+                            quantity: 15
+                            units: cups
+                            ingredient: spaghetti
+                        tags:
+                          - fast
+                          - easy
+                          - high protein
+                      score: 88
+      operationId: get-recipe-recommendation
+      description: Returns a list of recipes most similar to the original recipes. It takes the a recipe and searches for all recipes in the database with at least one common ingredient. It then ranks the recipes based off the Levenshtein distance between the two recipes ingredients list.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rid:
+                  type: integer
+            examples:
+              Example 1:
+                value:
+                  rid: 2
+        description: ''
+  /recipe/mealplan/:
+    get:
+      summary: Get meal plan
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meal_type:
+                    description: "meal_type will be replaced by the meal types specified in the body of the request. For example if ['Breakfast', 'Lunch', 'Dinner'] was inputted there will be three keys with the same name each with an array of recipes"
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Recipe'
+              examples:
+                Successful meal plan:
+                  value:
+                    meal_type:
+                      - id: 56
+                        uid: 330
+                        name: meatballs
+                        cuisine: italian
+                        cooking_style: boil
+                        meal_type: dinner
+                        time: 60
+                        method: 1. 2. 3.
+                        plating: idk
+                        servings: 4
+                        image: base64 data
+                        calories: 520
+                        protein: 10
+                        carbs: 20
+                        fats: 40
+                        created_date: '2019-08-24'
+                        modified_date: '2019-08-24'
+                        uploaded_by: matt
+                        user_rating: 1
+                        total_rating: 63
+                        ingredients:
+                          - id: 1
+                            rid: 522
+                            quantity: 5
+                            units: cups
+                            ingredient: plain flour
+                          - id: 2
+                            rid: 522
+                            quantity: 15
+                            units: cups
+                            ingredient: spaghetti
+                        tags:
+                          - fast
+                          - easy
+                          - high protein
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Non-positive meal types selected:
+                  value:
+                    message: No meals returned. Add at least one meal type.
+                Non-positive number of people selected:
+                  value:
+                    message: No meals returned. Add at least one person.
+                Non-positive number of days selected:
+                  value:
+                    message: No meals returned. Add at least one day.
+      operationId: get-recipe-mealplan
+      description: Gets a list of recipes broken down by meal type that a user can add to meal plan. The recipes are chosen based on those closest to their preferences with recipes excluded if they are on a users avoidance list.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                number_of_people:
+                  type: integer
+                number_of_days:
+                  type: integer
+                meal_type:
+                  type: array
+                  items:
+                    type: string
+                preferences:
+                  type: object
+                  properties:
+                    name:
+                      type: array
+                      items:
+                        type: string
+                    cooking_style:
+                      type: array
+                      items:
+                        type: string
+                    cuisine:
+                      type: array
+                      items:
+                        type: string
+                    tags:
+                      type: array
+                      items:
+                        type: string
+                    ingredients:
+                      type: array
+                      items:
+                        type: string
+                avoidances:
+                  type: object
+                  properties:
+                    name:
+                      type: array
+                      items:
+                        type: string
+                    cooking_style:
+                      type: array
+                      items:
+                        type: string
+                    cuisine:
+                      type: array
+                      items:
+                        type: string
+                    tags:
+                      type: array
+                      items:
+                        type: string
+                    ingredients:
+                      type: array
+                      items:
+                        type: string
+            examples:
+              Example 1:
+                value:
+                  number_of_people: 0
+                  number_of_days: 0
+                  meal_type:
+                    - string
+                  preferences:
+                    name:
+                      - string
+                    cooking_style:
+                      - string
+                    cuisine:
+                      - string
+                    tags:
+                      - string
+                    ingredients:
+                      - string
+                  avoidances:
+                    name:
+                      - string
+                    cooking_style:
+                      - string
+                    cuisine:
+                      - string
+                    tags:
+                      - string
+                    ingredients:
+                      - string
+components:
+  schemas:
+    Recipe:
+      title: Recipe
+      x-stoplight:
+        id: qa7e4reyss5h0
+      type: object
+      examples:
+        - id: 56
+          uid: 330
+          name: meatballs
+          cuisine: italian
+          cooking_style: boil
+          meal_type: dinner
+          time: 60
+          method: 1. 2. 3.
+          plating: idk
+          servings: 4
+          image: base64 data
+          calories: 520
+          protein: 10
+          carbs: 20
+          fats: 40
+          created_date: '2019-08-24'
+          modified_date: '2019-08-24'
+          uploaded_by: matt
+          user_rating: 1
+          total_rating: 63
+          ingredients:
+            - id: 1
+              rid: 522
+              quantity: 5
+              units: cups
+              ingredient: plain flour
+            - id: 2
+              rid: 522
+              quantity: 15
+              units: cups
+              ingredient: spaghetti
+          tags:
+            - fast
+            - easy
+            - high protein
+      properties:
+        id:
+          type: integer
+        uid:
+          type: integer
+        is_subscribed:
+          type: boolean
+        name:
+          type: string
+        cuisine:
+          type: string
+        cooking_style:
+          type: string
+        meal_type:
+          type: string
+        time:
+          type: integer
+        method:
+          type: string
+        plating:
+          type: string
+        servings:
+          type: integer
+        image:
+          type: string
+          format: base64
+        calories:
+          type: number
+        protein:
+          type: number
+        carbs:
+          type: number
+        fats:
+          type: number
+        created_date:
+          type: string
+          format: date
+        modified_date:
+          type: string
+          format: date
+        uploaded_by:
+          type: string
+        user_rating:
+          type: integer
+        total_rating:
+          type: integer
+        ingredients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ingredient'
+        tags:
+          type: array
+          items:
+            type: string
+      required:
+        - name
+        - method
+        - plating
+        - image
+    Ingredient:
+      title: Ingredient
+      x-stoplight:
+        id: gruwhs31tgl9i
+      type: object
+      properties:
+        id:
+          type: integer
+        rid:
+          type: integer
+        quantity:
+          type: number
+        units:
+          type: string
+        ingredient:
+          type: string
+      examples:
+        - id: 1
+          rid: 522
+          quantity: 5
+          units: cups
+          ingredient: plain flour
+        - id: 223
+          rid: 14
+          quantity: 2
+          units: tbsp
+          ingredient: salt
+        - id: 76
+          rid: 78
+          quantity: 6
+          units: kilograms
+          ingredient: chicken
+    Subscribe:
+      title: Subscribe
+      x-stoplight:
+        id: uc0midaqdzq98
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      examples:
+        - id: 1
+          name: Chef
+    Shopping-List-Recipe:
+      title: Shopping-List-Recipe
+      x-stoplight:
+        id: u98l1jns4nqfz
+      type: object
+      examples:
+        - id: 1
+          uid: 3
+          rid: 2
+          servings: 4
+      properties:
+        id:
+          type: integer
+        uid:
+          type: integer
+        rid:
+          type: integer
+        servings:
+          type: integer
+    Shopping-List-Ingredient:
+      title: Shopping-List-Ingredient
+      x-stoplight:
+        id: 7b02xnkywdzld
+      type: object
+      examples:
+        - id: 1
+          uid: 2
+          rid: 3
+          quantity: 100
+          units: mL
+          ingredient: cream
+      properties:
+        id:
+          type: integer
+        uid:
+          type: integer
+        rid:
+          type: integer
+        quantity:
+          type: number
+        units:
+          type: string
+        ingredient:
+          type: string
+    Cookbook:
+      title: Cookbook
+      x-stoplight:
+        id: kawen9s8ui4ro
+      type: object
+      properties:
+        cookbook_id:
+          type: string
+        cookbook_name:
+          type: string
+        cookbook_des:
+          type: string
+        recipes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Recipe'
+      examples:
+        - cookbook_id: '7'
+          cookbook_name: My Cookbook
+          cookbook_des: A cookbook to store my favourite recipes
+          recipes:
+            - id: 56
+              uid: 330
+              is_subscribed: false
+              name: meatballs
+              cuisine: italian
+              cooking_style: boil
+              meal_type: dinner
+              time: 60
+              method: 1. 2. 3.
+              plating: idk
+              servings: 4
+              image: base64 data
+              calories: 520
+              protein: 10
+              carbs: 20
+              fats: 40
+              created_date: '2019-08-24'
+              modified_date: '2019-08-24'
+              uploaded_by: matt
+              user_rating: 1
+              total_rating: 63
+              ingredients:
+                - id: 1
+                  rid: 522
+                  quantity: 5
+                  units: cups
+                  ingredient: plain flour
+                - id: 2
+                  rid: 522
+                  quantity: 15
+                  units: cups
+                  ingredient: spaghetti
+              tags:
+                - fast
+                - easy
+                - high protein
+    Aggregate-Ingredient:
+      title: Aggregate-Ingredient
+      x-stoplight:
+        id: pn0ahnpf0rb13
+      type: object
+      properties:
+        quantity:
+          type: number
+        units:
+          type: string
+        name:
+          type: string
+      examples:
+        - quantity: 2
+          units: kg
+          name: fish
+    Aggregate-Ingredient-2:
+      title: Aggregate-Ingredient-2
+      x-stoplight:
+        id: fdtvjsvpe1sck
+      type: object
+      properties:
+        id:
+          type: integer
+        quantity:
+          type: number
+        units:
+          type: string
+        ingredient:
+          type: string
+      examples:
+        - id: 1
+          quantity: 5
+          units: tsp
+          ingredient: msg
+    Comment:
+      title: Comment
+      x-stoplight:
+        id: wiur5p8f625v4
+      type: object
+      examples:
+        - id: 1
+          rid: 4
+          uid: 2
+          comment: First comment
+          username: Andrew
+      properties:
+        id:
+          type: integer
+        rid:
+          type: integer
+        uid:
+          type: integer
+        comment:
+          type: string
+        username:
+          type: string
+  responses: {}

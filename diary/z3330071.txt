@@ -1,0 +1,65 @@
+Week 1
+Group formed on first meeting. We shortlisted two projects from our initial meeting on 12/09/22 to be discussed at our second meeting during the week (16/09/22).
+During the second meeting, we formed a consensus on the meal recommendation system project. I, along with all team members brainstormed novel ideas and a high level technology stack for the project. We also assigned roles on who would be focusing on what parts of the project based off prior skills and experience. I nominated myself for back-end tasks.
+We agree as a team to read through the project spec throughly and think about features and user stories ahead of our next meeting on 19/09/22.
+
+Week 2
+
+We agreed on the novel features we wanted to build. I took meeting notes as we discussed our ideas with Dylan. I started putting down notes for each section with more focus on the background and data layer of our proposal on some of the ideas we wanted to write about.
+We had a second meeting on 23/09/22 to split out tasks for the proposal. I was assigned the background section as I had already did some of the work here.
+Scheduled our next meeting for the 26/09/22
+
+Week 3
+
+We went through our proposal and shared our progress. We agreed to have a first draft ready for our lab on 30/09/22.
+Edited and provided initial comments of our first draft proposal. We sought clarification from Dylan on a few outstanding items. I was assigned to help out with the novel features section to tie this back in with the user stories.
+Had a quick meeting with Matt to go through the basic code environment.
+
+Week 4
+On 2/10/22 we had a progress meeting to discuss the final steps of the proposal. I worked on editing the document as well as helping out on Storyboards and Interface diagrams and how they relate to stories by adding explanations to accompany the diagrams.
+On 7/10/22 we met with Dylan to discuss our progress. I didn't have much to contribute as I work during the week. After the meeting we discussed some questions that the front end team had.
+I had a separate meeting with Matt after to discuss backend and get an update on where he was at and remaining work. I was assigned to create the cookbook api endpoints along with the recipe list endpoint for the homepage.
+On 8/10/22 finished coding and testing the cookbook api endpoints and uploaded my branch to github for review.
+
+Week 5
+On 9/10/22 we had a stand-up in the morning where we dicussed what we had done in tasks to be completed today. I amended the cookbook api endpoints after receiving comments from my merge request. Reviewed code pushed by Matt for the backend. Created recipe_list GET endpoint. Pushed changes for second review.
+On 10/10/22 we had a stand-up meeting in the morning. Remaining tasks to be completed were the merge of the front and back end together for the demo. Han-Hsin was assigned this and directed queries where needed. I completed the API documentation for the cookbook and recipe list endpoints on StopLight. I started to review the backlog of tasks on JIRA and came up with some child tasks for each ticket
+On 12/10/22 we had a meeting in the evening. As part of the Retrospective A, I was assigned the task of organising meetings and agendas. We discussed our submission for Retrospective A where Matt was tasked to submit the file. We discussed JIRA tickets for Sprint 2. Han-Hsin and myself where assigned to document child tasks for each user story. Each team member choose a user story to begin work on ahead of our next meeting on 17/10/22.
+On 15/10/22 I filled out back-end child tasks for each user story in JIRA for Sprint 2. I started looking at the two cookbook user stories (TV9900-29 and 31) as I had already started these endpoints in Sprint 1.
+On 16/10/22 I completed and tested the two tasks I started yesterday and pushed my branch to GitHub for Matt to review. I updated the endpoint documentation and associated JIRA tickets.
+
+Week 6
+
+On 17/10/22 I started working on user subscribe endpoints.
+On 18/10/22 we held a stand-up meeting in the evening. At the meeting we discussed what we had worked on since last meeting. We also tried to assign child tasks which we found difficult as we wanted to give a fair distribution, but group similar tasks together. We eventually had break outs for front-end and back-end and the Han-Hsin and Matt assigned child tasks based off those meetings. I was assigned tasks around cookbooks (as I had already implemented), user recipe feed, subscribing, recipe tag data and shopping lists.
+On 21/10/22 we held a stand-up meeting in the evening. We discussed what we worked on since last meeting. Kexin and I decided to organise a catch-up to discuss inputs and outputs for some of the endpoints to make integration between front-end and back-end easier.
+
+Week 7
+
+On 23/10/22 I finished working on the user subscribe endpoints. I created a pytest file for the subscribe endpoint test cases and updated the stoplight documentation on the endpoints.
+On 24/10/22 I started  working on the user feed function on the recipe_list end point (TV9900-23 and TV9900-24). I had to reconfigure some of the previous code I did for this section from Sprint 1 to deal with a user not logging in. We had a stand-up meeting in the lab. We discussed the inputs and outputs for the recipe endpoints and decided that what was currently outputted was fit for use. We scheduled our next meeting for 27/10/22.
+On 25/10/22 I finished testing the user feed function and updated API documentation for this on StopLight. I amended some of the database tables for recipes and tags to include some new fields and rearranging data to be stored in each table based on discussions we had in our lab the day prior. I started working on recipe tags and integrating this into the get_single_recipe endpoints.
+On 26/10/22 I finished integrating tags into the get_single_recipe endpoint. I created a pytest test for this and updated the API documentation on StopLight for this functionality. I started working on the shopping_list endpoints for TV9900-33.
+On 27/10/22 we held a stand-up meeting to go through the work that was completed since the previous meeting. We discussed the remaining tickets on JIRA and felt confident in finishing Sprint 2 before the demo. There were some minor tweaks requested from Han-Hsin to be added to the backend. Two of these were assigned to me: 1. Adding user names to the subscribe endpoints and add a subscribed flag on the recipe endpoint.
+On 28/10/22 I completed the shopping list endpoints for TV9900-33.
+On 29/10/22 I finished testing of the shopping list endpoints and updated the documentation of these endpoints on StopLight.
+
+Week 8
+On 30/10/22 I added user_id functionality to the get cookbook endpoint (TV9900-111). I also updated the testing for cookbooks so it is included in the pytest framework. We had a stand-up meeting in the evening where we went through what we had worked on since the last meeting and what is left to do. There were changes that needed to be made to the shopping list endpoint mainly the addition and deletion of single ingredients since I will need to fix before the demo tomorrow.
+On 31/10/22 I reworked the shopping list endpoints to account for adding/amending/deleting individual ingredients. We had a meeting to go through the demo. I was assigned to add a field to the recipe details on whether the user is subscribed to the contributor of the recipe. We held our second demo and retrospective in the evening.
+On 1/11/22 I discussed backend tasks with Matt we divided the sprint three tasks. I was assigned recipe comments, recipe recommendations and the meal plan. I updated some of the StopLight documentation around cookbooks and shopping lists.
+On 2/11/22 I started and finished work on the comments endpoints (TV9900-18). This involved creating a pytest and documenting the endpoints on stoplight. We had a stand-up meeting in the evening. We made final amendments to retrospective B. We went through the JIRA tickets for sprint 3 and refined the acceptance criteria and child tasks that Han-Hsin and myself pre-populated. We also set out a timeline of deliverabes for the last two weeks of the project.
+On 3/11/22 I started and finished work on the basic recommendation endpoint (TV9900-25). This involved creating a pytest and documenting the endpoints on stoplight. 
+
+Week 9
+On 7/11/22 I started the meal plan endpoint (TV9900-34). We had a meeting at our lab where we went through and documented all bugs currently in the app and stored child tasks on JIRA for them.
+On 8/11/22 I completed testing of the meal plan endpoint and updated documentation for this on StopLight. I also updated the bugs that were assigned to me.
+On 9/11/22 I amended the meal plan endpoint for comments in the code review. I created a skeleton for the final demo and user manual to be discussed with the team at our next meeting.
+On the 12/11/22 we had two meetings. The first was to go through the bugs that were identified in the previous meeting and fixed. Additional bugs were added to the list as we went through user testing. We decided to priortise the remaining bugs and finish as many of these before the second meeting in the evening. At the second meeting. Similar to the first we checked that the bugs identified were fixed and agreed that the remaining items on the list were nice to have features that would not be implemented. During the bug bounty process I was in charge of documenting and maintaining the status of the bugs on JIRA. As most of the bugs were front-end related and not having front-end skills I decided to work on report as help out if any back-end related requests were needed.
+
+Week 10
+
+On 13/11/22 I continued working on the report, specifically creating the user manual. We had a meeting to have a demo run through. We split out the demo into functions broadly aligned with parts we worked on in the app. I was assigned the recommendations and meal plan to demo.
+On 14/11/22 we presented our final demo. We discussed the work remaining around the code and report submission and assigned tasks to be completed over the last week. I was assigned the backend system architecture and the user manual on how to use the app.
+On 15/11/22 and 16/11/22 I worked on my asssigned sections of the report.
+On 17/11/22 we had a meeting to go through the report and code. I made edits to the final report.

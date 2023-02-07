@@ -1,0 +1,76 @@
+by Kexin Zhaos
+Week 1
+1. Group formed.
+2. Read each projects specification and discussed with the team about our preferences and reasons.
+3. I discussed with the team and the tutor about the possible novel functionalities we
+can have for the projects we are interested in.
+    Possible options: 1 meal plan to reduce the food waste
+                      2 auto generate tags for food
+                      3 switcher to healthy mode
+                      ...
+
+
+Week 2
+1. Studied on the proposal specification
+2. Discussed with the team about the ideas of the proposal
+
+
+Week 3
+1. Draw the overall project flow chart including
+    some basic Ui/UX design
+    creating pages and their jump to satisfy the user story
+2. Wrote the novel functionality meal plan part in proposal.
+3. Inspect on user stories and give advice on the shopping list and meal plan.
+
+
+
+Week 4
+1. Discuss the technique stack of front-end within the team
+2. Set up the skeleton of front-end, so we can divide the task to each people. Also add an eslint file to front-ends
+4. Responsible for create recipe and view recipe page
+
+Week 5
+1. Demo A retrospective meetings
+2. Search reference material for our front end design. Meet with Almersy to talk about the UI design
+3. Contribute to the final design
+
+Week 6
+...
+
+Week 7
+
+Rebuild the project based on the new design
+Finish the AppBar part
+Change the sign-in and sign-up page to pop-up and complete the code, connect to backend and pass through test
+Start working on view recipe and create recipe page
+Create some reusable component for the project
+
+Week 7
+Meet with team members to talk about the API consistency of front-end and back-end
+Front end layout of create recipe and view recipe page
+change tags in create recipe page style ( look like view recipe page )
+connect homepage to backend
+
+Week 8
+have meeting with team members, outcome:
+no platting instruction picture
+no step and step picture
+no nutrition information in create page
+
+Finish view recipe page, add send likes/dislikes/comment function, leave button for add to cookbook/ shopping list
+Ingredients adjust with the servings
+Finish create recipe page
+
+
+Week 9
+Build comments, recommendation, fix bug in scale ingredients
+Fix list of bugs
+build the trending page
+prepare for the final demo
+
+Week 10
+Clean the code:
+    1 separate create recipe and view recipe
+    2 delete unused code
+    3 run eslint --fix
+Write the overview and technical challenge part of final report

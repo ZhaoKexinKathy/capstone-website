@@ -1,0 +1,65 @@
+Week 1
+1. Group formed. 
+2. I studied each projects and discussed with the team about our preferences and reasons. 
+3. I found and discussed with the team and the tutor about the possible novel functionalities we 
+can have for the projects we are interested in.
+
+
+Week 2
+1. Studied on the proposal specification
+2. Discussed with the team about the ideas of the proposal
+3. Wrote user stories part of the proposal with Han-Hsin
+4. Created the report format of the proposal
+
+
+Week 3
+1. Went through the draft of our proposal with the team
+2. Revised the user stories according to the team meeting
+3. Wrote acceptance for user stories and novel additions and sprints in the proposal
+4. Revised the objectives with user stories and user stories
+5. Revised the proposal format and reference
+
+
+Week 4
+1. Researched about templates for the front end web pages
+2. Learned html, css, javascript technics for coding
+3. Coded the log in and sign up parts of the front end
+
+Week 5
+1. Wrote and finished the UI design to meet all the page requirements and discussed 
+that with Kexin
+2. Learned to use MUI
+
+Week 6&7
+1. Updated the UI design as discussed in the meeting
+2. Learned coding style components
+3. Wrote standard recipe card, recipe card for shopping list, add recipe to cookbook 
+pop up window, and footer components
+
+Week 8
+1. Created UI design for new pages and updated the UI design as discussed in the meeting
+2. Learned to use MUI Schema
+3. Updated the components I wrote last week according to the requirements
+4. Wrote cookbook card component, create a new cookbook pop up window, pages of 
+newsfeed, searching result, my recipes, single cookbook, and my cookbooks
+5. Wrote navigations of create a new cookbook, add to cookbook from create recipe and 
+recipe pages, searching result page from home page and advance search pop up window,
+and my cookbooks, single cookbook page, my recipes page from profile page and between
+each page
+
+Week 9
+1. Finalized the UI design as discussed in the meeting and created UI design for new pages
+2. Fixed bugs and updated pages and components according to the new requirements from 
+the team meetings
+3. Finished bug list tasks from Jira
+4. Wrote more recommendation page, updated the user's pop up window for create recipe, 
+profile, shopping list and log out to make it the same as the UI design
+5. Went through, tested and adjust our program with the team according to the team meetings
+
+Week 10
+1. Prepared the final demo
+2. Went through the test with the team
+3. Wrote the descriptions of the functionalities developed by the team and how they map / 
+address all project objectives part and implementation challenges part of the report
+4. Reviewed and revised the final report with the team
+5. Finalized our github
